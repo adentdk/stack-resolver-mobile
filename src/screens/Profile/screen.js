@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
 import {AppWrapper} from '../../component';
+import Header from './components/Header';
+import FormProfile from './components/FormProfile';
 
 const ProfileScreen = () => {
   return (
-    <AppWrapper>
-      <View>
-        <Text>Profile</Text>
-      </View>
+    <AppWrapper scrollable={true}>
+      <Header />
+      <FormProfile />
     </AppWrapper>
   );
 };
