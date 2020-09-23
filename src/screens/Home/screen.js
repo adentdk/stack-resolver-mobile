@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Text, View} from 'react-native';
 import {AppWrapper} from '../../component';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   return (
     <AppWrapper>
       <View>

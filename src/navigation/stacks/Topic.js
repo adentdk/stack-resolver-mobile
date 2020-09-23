@@ -5,11 +5,15 @@ import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './../../screens/Home';
 import TopicDetailScreen from './../../screens/TopicDetail';
 import {screenNames} from '../../shared/screen';
+import {NavHeaderAuthenticated} from '../../component';
 
 const Stack = createStackNavigator();
 export const TopicStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        header: NavHeaderAuthenticated,
+      }}>
       <Stack.Screen
         component={HomeScreen}
         name={screenNames.Topic}
