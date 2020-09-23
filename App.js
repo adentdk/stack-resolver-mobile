@@ -1,10 +1,13 @@
 import 'react-native-gesture-handler';
 import React from 'react';
+import {Provider as ReduxProvider} from 'react-redux';
 import AppNavigation from './src/navigation';
+import store from './src/redux/store';
 const App = () => {
-  // eslint-disable-next-line prettier/prettier
   return (
-    <AppNavigation />
+    <ReduxProvider store={store}>
+      <AppNavigation />
+    </ReduxProvider>
   );
 };
 
