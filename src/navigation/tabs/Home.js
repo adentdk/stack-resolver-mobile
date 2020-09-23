@@ -9,8 +9,20 @@ const Tab = createBottomTabNavigator();
 export const HomeTabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen component={TopicStack} name={screenNames.Topic} />
-      <Tab.Screen component={ProfileStack} name={screenNames.Profile} />
+      <Tab.Screen
+        component={TopicStack}
+        name={screenNames.Topic}
+        options={{
+          title: 'Topic',
+        }}
+      />
+      <Tab.Screen
+        component={ProfileStack}
+        name={screenNames.Profile}
+        options={{
+          title: 'Profile',
+        }}
+      />
     </Tab.Navigator>
   );
 };

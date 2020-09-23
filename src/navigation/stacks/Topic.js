@@ -10,7 +10,13 @@ const Stack = createStackNavigator();
 export const TopicStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen component={HomeScreen} name={screenNames.Topic} />
+      <Stack.Screen
+        component={HomeScreen}
+        name={screenNames.Topic}
+        options={{
+          title: 'Topic',
+        }}
+      />
       <Stack.Screen
         component={TopicDetailScreen}
         name={screenNames.TopicDetail}

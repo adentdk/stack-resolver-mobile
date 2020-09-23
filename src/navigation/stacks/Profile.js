@@ -10,7 +10,11 @@ const Stack = createStackNavigator();
 export const ProfileStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen component={Profile} name={screenNames.Profile} />
+      <Stack.Screen
+        component={Profile}
+        name={screenNames.Profile}
+        options={{title: 'Profile'}}
+      />
     </Stack.Navigator>
   );
 };
