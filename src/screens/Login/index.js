@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {doLogin} from '../../redux/actions/auth';
 import LoginScreen from './screen';
 
@@ -6,6 +6,8 @@ const mapStateToProps = (state) => {
   const authState = state.auth;
   return {
     loading: authState.loginLoading,
+    failed: authState.loginFailed,
+    error: authState.error,
   };
 };
 

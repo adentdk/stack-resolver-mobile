@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {doLogout} from '../../redux/actions/auth';
 import ProfileScreen from './screen';
 

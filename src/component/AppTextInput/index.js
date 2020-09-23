@@ -16,6 +16,7 @@ export const AppTextInput = ({
   autoCapitalize = '',
   placeholder = '',
   disabled = false,
+  secureTextEntry = false,
 }) => {
   return (
     <View style={styles.wrapper}>
@@ -31,6 +32,7 @@ export const AppTextInput = ({
         returnKeyType={returnKeyType}
         onBlur={onBlur}
         onChangeText={onChangeText}
+        secureTextEntry={secureTextEntry}
       />
       {error && <Text style={[styles.errorText]}>{errorText}</Text>}
     </View>

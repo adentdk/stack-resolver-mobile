@@ -5,4 +5,6 @@ export default {
   grey: '#aaaaaa',
   red: '#dd0000',
   transparent: 'transparent',
+  transparentBlack: 'rgba(10, 10, 10, 0.6)',
+
 };

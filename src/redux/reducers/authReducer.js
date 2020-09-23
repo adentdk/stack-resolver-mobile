@@ -32,17 +32,16 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loginLoading: true,
         loginSuccess: false,
-        loginError: false,
+        loginFailed: false,
       };
     case LOGIN_SUCCESS:
-      const {payload} = action;
       return {
         ...state,
         loginLoading: false,
         loginSuccess: true,
         auth: {
           ...state.auth,
-          token: payload,
+          token: action.payload,
         },
       };
     case LOGIN_FAILED:
@@ -50,20 +49,20 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loginLoading: false,
         loginFailed: true,
-        error: payload,
+        error: action.payload,
       };
     case LOGOUT_LOADING:
       return {
         ...state,
-        loginLoading: true,
-        loginSuccess: false,
-        loginError: false,
+        logoutLoading: true,
+        logoutSuccess: false,
+        logoutFailed: false,
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        loginLoading: false,
-        loginSuccess: true,
+        logoutLoading: false,
+        logoutSuccess: true,
         auth: {
           ...state.auth,
           token: null,
@@ -72,9 +71,9 @@ export const authReducer = (state = initialState, action) => {
     case LOGOUT_FAILED:
       return {
         ...state,
-        loginLoading: false,
-        loginFailed: true,
-        error: payload,
+        logoutLoading: false,
+        logoutFailed: true,
+        error: action.payload,
       };
     default:
       return state;
