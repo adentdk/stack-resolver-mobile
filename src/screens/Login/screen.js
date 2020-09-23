@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Alert, StyleSheet, Text} from 'react-native';
 import {AppButton, AppDevider, AppLoading, AppWrapper} from '../../component';
+import {screenNames} from '../../shared/screen';
 
 import FormLogin from './components/FormLogin';
 
@@ -19,6 +20,10 @@ const LoginScreen = ({navigation, loading, failed, error, doLogin}) => {
 
   const _onSubmit = ({email, password}) => {
     doLogin(email, password);
+  };
+
+  const _onRegisterPressed = () => {
+    navigation.navigate(screenNames.Register);
   };
 
   React.useEffect(() => {
@@ -40,7 +45,12 @@ const LoginScreen = ({navigation, loading, failed, error, doLogin}) => {
         />
         <AppDevider flex={1} />
         <Text style={[styles.registerText]}>
-          Don't have an account? <AppButton mode="link" title={'Register'} />
+          Don't have an account?{' '}
+          <AppButton
+            mode="link"
+            title={'Register'}
+            onPress={_onRegisterPressed}
+          />
         </Text>
       </AppWrapper>
     </>

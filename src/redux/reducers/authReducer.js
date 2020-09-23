@@ -5,6 +5,9 @@ import {
   LOGOUT_LOADING,
   LOGOUT_SUCCESS,
   LOGOUT_FAILED,
+  REGISTER_LOADING,
+  REGISTER_SUCCESS,
+  REGISTER_FAILED,
 } from '../constants';
 
 const initialState = {
@@ -14,6 +17,9 @@ const initialState = {
   logoutLoading: false,
   logoutSuccess: false,
   logoutFailed: false,
+  registerLoading: false,
+  registerSuccess: false,
+  registerFailed: false,
   auth: {
     email: '',
     token: null,
@@ -23,6 +29,7 @@ const initialState = {
     full_name: '',
   },
   error: null,
+  message: null,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -51,6 +58,7 @@ export const authReducer = (state = initialState, action) => {
         loginFailed: true,
         error: action.payload,
       };
+
     case LOGOUT_LOADING:
       return {
         ...state,
@@ -75,6 +83,29 @@ export const authReducer = (state = initialState, action) => {
         logoutFailed: true,
         error: action.payload,
       };
+
+    case REGISTER_LOADING:
+      return {
+        ...state,
+        registerLoading: true,
+        registerSuccess: false,
+        registerFailed: false,
+      };
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        registerLoading: false,
+        registerSuccess: true,
+        message: action.payload,
+      };
+    case REGISTER_FAILED:
+      return {
+        ...state,
+        registerLoading: false,
+        registerFailed: true,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

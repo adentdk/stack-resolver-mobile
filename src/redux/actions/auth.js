@@ -6,6 +6,9 @@ import {
   LOGOUT_LOADING,
   LOGOUT_SUCCESS,
   LOGOUT_FAILED,
+  REGISTER_LOADING,
+  REGISTER_SUCCESS,
+  REGISTER_FAILED,
 } from '../constants';
 
 export const doLogin = (email = null, password = null) => {
@@ -30,6 +33,34 @@ export const doLogin = (email = null, password = null) => {
     } catch (error) {
       dispatch({
         type: LOGIN_FAILED,
+        payload: error.response?.data?.message ?? error.message,
+      });
+    }
+  };
+};
+
+export const doRegister = ({name = null, email = null, password = null}) => {
+  return async (dispatch) => {
+    dispatch({
+      type: REGISTER_LOADING,
+    });
+
+    try {
+      if (!name || !email || !password) {
+        throw new Error('All field are required');
+      }
+
+      const body = {name, email, password};
+
+      const registerResponse = await client.post('/account/register', body);
+
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: registerResponse.data.message,
+      });
+    } catch (error) {
+      dispatch({
+        type: REGISTER_FAILED,
         payload: error.response?.data?.message ?? error.message,
       });
     }
