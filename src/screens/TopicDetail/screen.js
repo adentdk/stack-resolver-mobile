@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Text, View} from 'react-native';
 import {AppWrapper} from '../../component';
 
-const LoginScreen = () => {
+const TopicDetailScreen = () => {
   return (
     <AppWrapper>
       <View>
@@ -12,4 +12,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default TopicDetailScreen;

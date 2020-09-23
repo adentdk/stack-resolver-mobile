@@ -1,3 +1,3 @@
-import TopicScreen from './screen';
+import TopicDetailScreen from './screen';
 
-export default TopicScreen;
+export default TopicDetailScreen;
