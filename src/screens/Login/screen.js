@@ -1,16 +1,37 @@
 import * as React from 'react';
-import {Button, Text, View} from 'react-native';
-import {AppWrapper} from '../../component';
+import {Button, StyleSheet, Text, View} from 'react-native';
+import {AppButton, AppDevider, AppWrapper} from '../../component';
 
-const LoginScreen = () => {
+import FormLogin from './components/FormLogin';
+
+const LoginScreen = ({navigation}) => {
+  const _onFocus = () => {
+    navigation.setParams({
+      headerMode: 'small',
+    });
+  };
+
+  const _onBlur = () => {
+    navigation.setParams({
+      headerMode: 'normal',
+    });
+  };
   return (
-    <AppWrapper>
-      <View>
-        <Text>Login</Text>
-      </View>
-      <Button title="Register" />
+    <AppWrapper scrollable={true}>
+      <AppDevider height={40} />
+      <FormLogin onFocus={_onFocus} onBlur={_onBlur} />
+      <AppDevider flex={1} />
+      <Text style={[styles.registerText]}>
+        Don't have an account? <AppButton mode="link" title={'Register'} />
+      </Text>
     </AppWrapper>
   );
 };
 
 export default LoginScreen;
+
+const styles = StyleSheet.create({
+  registerText: {
+    textAlign: 'center',
+  },
+});
