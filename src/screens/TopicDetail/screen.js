@@ -2,14 +2,14 @@ import * as React from 'react';
 import {Text, View} from 'react-native';
 import {AppWrapper} from '../../component';
 
-const HomeScreen = () => {
+const LoginScreen = () => {
   return (
     <AppWrapper>
       <View>
-        <Text>HomeScreen</Text>
+        <Text>Topic Detail</Text>
       </View>
     </AppWrapper>
   );
 };
 
-export default HomeScreen;
+export default LoginScreen;

@@ -2,15 +2,15 @@ import * as React from 'react';
 import {Button, Text, View} from 'react-native';
 import {AppWrapper} from '../../component';
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
   return (
     <AppWrapper>
       <View>
-        <Text>Login</Text>
+        <Text>Register</Text>
       </View>
-      <Button title="Register" />
+      <Button title="Login" />
     </AppWrapper>
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
