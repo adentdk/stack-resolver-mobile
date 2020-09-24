@@ -24,8 +24,7 @@ const HomeScreen = ({
 
   const _onItemPress = (topic) => {
     navigation.navigate(screenNames.TopicDetail, {
-      topicId: topic.id,
-      title: topic.title,
+      topic: topic,
     });
   };
 

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {doGetTopicList} from '../../redux/actions/topic';
-import HomeScreen from './screen';
+import TopicScreen from './screen';
 
 const mapStateToProps = (state) => {
   const topicState = state.topic;
@@ -18,4 +18,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(TopicScreen);

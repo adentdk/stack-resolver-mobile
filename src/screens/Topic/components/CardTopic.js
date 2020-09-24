@@ -4,18 +4,19 @@ import {StyleSheet, Text, View} from 'react-native';
 import {AppBadge, AppBox, AppButton, AppDevider} from '../../../component';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export const CardTopic = ({item}) => {
+export const CardTopic = ({item, onPress}) => {
+  const tags = Array.isArray(item) ? item.tags : JSON.parse(item.tags);
   return (
     <AppBox
-      height={190}
+      height={180}
       color={'#eeeeee'}
       paddingHorizontal={10}
       marginVertical={10}
       elevation={5}
       borderRadius={8}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => onPress(item)}>
         <View style={styles.row}>
-          <CardHeaderRowItem count={20} label={'Answers'} />
+          <CardHeaderRowItem count={item.commentCount} label={'Answers'} />
           <CardHeaderRowItem count={item.viewed} label={'Views'} />
         </View>
         <AppBox height={42}>
@@ -25,14 +26,14 @@ export const CardTopic = ({item}) => {
         </AppBox>
         <AppDevider height={10} />
         <View style={styles.row}>
-          {item.tags.map((tag, key) => {
+          {tags.map((tag, key) => {
             return <AppBadge key={key} text={tag} />;
           })}
         </View>
         <AppBox alignItems="flex-end">
-          <Text>{moment(item.createdAt).format('HH:mm DD/MM/YYYY')}</Text>
           <Text>
-            Created by <AppButton mode="link" title={item.createdBy} />
+            Created by <AppButton mode="link" title={item.createdBy} /> (
+            {moment(item.created_at).format('HH:mm DD/MM/YYYY')})
           </Text>
         </AppBox>
       </TouchableOpacity>
