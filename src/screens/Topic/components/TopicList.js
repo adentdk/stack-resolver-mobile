@@ -4,9 +4,9 @@ import {AppBox, AppDevider} from '../../../component';
 import {keyExtractor} from '../../../shared/virtualList';
 import {CardTopic} from './CardTopic';
 
-const TopicList = ({rows, pagination}) => {
+const TopicList = ({rows, pagination, onItemPress}) => {
   const renderItem = ({item, index}) => {
-    return <CardTopic item={item} key={index} />;
+    return <CardTopic item={item} key={index} onPress={onItemPress} />;
   };
 
   return (

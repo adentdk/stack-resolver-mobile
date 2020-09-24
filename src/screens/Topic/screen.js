@@ -18,8 +18,15 @@ const HomeScreen = ({
     navigation.navigate(screenNames.NewTopic);
   };
 
-  const _onGetTopicList = () => {
+  const _onGetTopicList = React.useCallback(() => {
     doGetTopicList({});
+  }, [doGetTopicList]);
+
+  const _onItemPress = (topic) => {
+    navigation.navigate(screenNames.TopicDetail, {
+      topicId: topic.id,
+      title: topic.title,
+    });
   };
 
   React.useEffect(() => {
@@ -31,13 +38,24 @@ const HomeScreen = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  React.useEffect(() => {
+    if (reload) {
+      console.log(reload);
+      _onGetTopicList();
+    }
+  }, [_onGetTopicList, reload]);
+
   return (
     <>
       <AppLoading visible={listLoading} />
       <AppWrapper scrollable={true}>
         <CreateNewTopic onPress={_onCreateNewTopicPressed} />
         <AppDevider height={20} />
-        <TopicList pagination={listPagination} rows={listData} />
+        <TopicList
+          pagination={listPagination}
+          rows={listData}
+          onItemPress={_onItemPress}
+        />
       </AppWrapper>
     </>
   );

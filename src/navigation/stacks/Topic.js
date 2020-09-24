@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
-import HomeScreen from './../../screens/Home';
+import TopicScreen from '../../screens/Topic';
 import TopicDetailScreen from './../../screens/TopicDetail';
 import NewTopicScreen from './../../screens/NewTopic';
 import {screenNames} from '../../shared/screen';
@@ -16,7 +16,7 @@ export const TopicStack = () => {
         header: NavHeaderAuthenticated,
       }}>
       <Stack.Screen
-        component={HomeScreen}
+        component={TopicScreen}
         name={screenNames.Topic}
         options={{
           title: 'Topic',
