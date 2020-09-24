@@ -4,6 +4,7 @@ export const screenNames = {
   Login: 'App.Login',
   Register: 'App.Register',
   Topic: 'App.Topic',
+  NewTopic: 'App.NewTopic',
   TopicDetail: 'App.TopicDetail',
   Profile: 'App.Profile',
 };
