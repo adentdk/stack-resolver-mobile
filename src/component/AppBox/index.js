@@ -15,6 +15,9 @@ export const AppBox = ({
   paddingHorizontal = undefined,
   borderRadius = 0,
   elevation = undefined,
+  borderHorizontal = undefined,
+  paddingVertical = undefined,
+  borderRight = undefined,
 }) => {
   return (
     <View
@@ -26,12 +29,19 @@ export const AppBox = ({
           marginVertical,
           marginHorizontal,
           paddingHorizontal,
+          paddingVertical,
           borderRadius,
           flex,
           backgroundColor: color,
           elevation,
           justifyContent,
           alignItems,
+          borderRightWidth: borderRight,
+        },
+
+        borderHorizontal !== undefined && {
+          borderTopWidth: borderHorizontal,
+          borderBottomWidth: borderHorizontal,
         },
       ]}
       children={children}
