@@ -1,21 +1,42 @@
 import * as React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import {AppBox, AppDevider, AppTextInput, AppWrapper} from '../../component';
+import {AppDevider, AppLoading, AppWrapper} from '../../component';
 import {screenNames} from '../../shared/screen';
 import CreateNewTopic from './components/CreateNewTopic';
 import TopicList from './components/TopicList';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({
+  navigation,
+  doGetTopicList,
+  listLoading,
+  listData,
+  listPagination,
+}) => {
   const _onCreateNewTopicPressed = () => {
-    console.log('halo');
     navigation.navigate(screenNames.NewTopic);
   };
+
+  const _onGetTopicList = () => {
+    doGetTopicList({});
+  };
+
+  React.useEffect(() => {
+    const bootstrap = () => {
+      _onGetTopicList();
+    };
+
+    bootstrap();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <AppWrapper>
-      <CreateNewTopic onPress={_onCreateNewTopicPressed} />
-      <AppDevider height={20} />
-      <TopicList />
-    </AppWrapper>
+    <>
+      <AppLoading visible={listLoading} />
+      <AppWrapper>
+        <CreateNewTopic onPress={_onCreateNewTopicPressed} />
+        <AppDevider height={20} />
+        <TopicList pagination={listPagination} rows={listData} />
+      </AppWrapper>
+    </>
   );
 };
 

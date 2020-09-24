@@ -10,6 +10,11 @@ export const AppBox = ({
   children = null,
   justifyContent = undefined,
   alignItems = undefined,
+  marginVertical = undefined,
+  marginHorizontal = undefined,
+  paddingHorizontal = undefined,
+  borderRadius = 0,
+  elevation = undefined,
 }) => {
   return (
     <View
@@ -18,8 +23,13 @@ export const AppBox = ({
         {
           height,
           width,
+          marginVertical,
+          marginHorizontal,
+          paddingHorizontal,
+          borderRadius,
           flex,
           backgroundColor: color,
+          elevation,
           justifyContent,
           alignItems,
         },

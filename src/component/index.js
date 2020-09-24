@@ -4,5 +4,6 @@ export {AppButton} from './AppButton';
 export {AppDevider} from './AppDevider';
 export {AppLoading} from './AppLoading';
 export {AppBox} from './AppBox';
+export {AppBadge} from './AppBadge';
 export {NavHeaderAuthenticated} from './NavHeaderAuthenticated';
 export {NavHeaderUnAuthenticated} from './NavHeaderUnAuthenticated';
