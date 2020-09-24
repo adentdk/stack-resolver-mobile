@@ -13,16 +13,18 @@ export const AppTextInput = ({
   onFocus = null,
   error = false,
   errorText = '',
-  autoCapitalize = '',
+  autoCapitalize = 'none',
   placeholder = '',
   disabled = false,
   secureTextEntry = false,
+  height = undefined,
 }) => {
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, height && {height: height + 10 + 46}]}>
       <Text style={[styles.baseText]}>{label}</Text>
       <TextInput
-        style={[styles.base, error && styles.baseError]}
+        style={[styles.base, error && styles.baseError, {height}]}
+        textAlignVertical="top"
         value={value}
         onFocus={onFocus}
         editable={!disabled}
@@ -51,9 +53,12 @@ const styles = StyleSheet.create({
   base: {
     height: 46,
     backgroundColor: colors.white,
-    borderRadius: 4,
+    borderRadius: 8,
     borderWidth: 0.5,
+    paddingHorizontal: 10,
     borderColor: colors.grey,
+    fontSize: 17,
+    fontWeight: '600',
   },
   baseText: {},
   errorText: {
