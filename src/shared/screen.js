@@ -6,5 +6,6 @@ export const screenNames = {
   Topic: 'App.Topic',
   NewTopic: 'App.NewTopic',
   TopicDetail: 'App.TopicDetail',
+  NewComment: 'App.NewComment',
   Profile: 'App.Profile',
 };

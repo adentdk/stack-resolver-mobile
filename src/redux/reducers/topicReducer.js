@@ -6,6 +6,13 @@ import {
   GET_TOPICS_LOADING,
   GET_TOPICS_SUCCESS,
   CREATE_TOPIC_SET_DEFAULT,
+  GET_TOPIC_COMMENTS_LOADING,
+  GET_TOPIC_COMMENTS_SUCCESS,
+  GET_TOPIC_COMMENTS_FAILED,
+  CREATE_TOPIC_COMMENT_LOADING,
+  CREATE_TOPIC_COMMENT_SUCCESS,
+  CREATE_TOPIC_COMMENT_FAILED,
+  CREATE_COMMENT_SET_DEFAULT,
 } from '../constants';
 
 const initialState = {
@@ -15,8 +22,15 @@ const initialState = {
   topicCreateLoading: false,
   topicCreateSuccess: false,
   topicCreateFailed: false,
+  commentCreateLoading: false,
+  commentCreateSuccess: false,
+  commentCreateFailed: false,
+  commentListLoading: false,
+  commentListSuccess: false,
+  commentListFailed: false,
   topicList: [],
   topicPagination: {},
+  commentList: [],
   error: null,
   message: null,
 };
@@ -73,6 +87,57 @@ export const topicReducer = (state = initialState, action) => {
         topicCreateLoading: false,
         topicCreateSuccess: false,
         topicCreateFailed: false,
+      };
+
+    case GET_TOPIC_COMMENTS_LOADING:
+      return {
+        ...state,
+        commentListLoading: true,
+        commentListSuccess: false,
+        commentListFailed: false,
+      };
+    case GET_TOPIC_COMMENTS_SUCCESS:
+      return {
+        ...state,
+        commentListLoading: false,
+        commentListSuccess: true,
+        commentList: action.payload,
+      };
+    case GET_TOPIC_COMMENTS_FAILED:
+      return {
+        ...state,
+        commentListLoading: false,
+        commentListFailed: true,
+        error: action.payload,
+      };
+
+    case CREATE_TOPIC_COMMENT_LOADING:
+      return {
+        ...state,
+        commentCreateLoading: true,
+        commentCreateSuccess: false,
+        commentCreateFailed: false,
+      };
+    case CREATE_TOPIC_COMMENT_SUCCESS:
+      return {
+        ...state,
+        commentCreateLoading: false,
+        commentCreateSuccess: true,
+        message: action.payload,
+      };
+    case CREATE_TOPIC_COMMENT_FAILED:
+      return {
+        ...state,
+        commentCreateLoading: false,
+        commentCreateFailed: true,
+        error: action.payload,
+      };
+    case CREATE_COMMENT_SET_DEFAULT:
+      return {
+        ...state,
+        commentCreateLoading: false,
+        commentCreateSuccess: false,
+        commentCreateFailed: false,
       };
     default:
       return state;
