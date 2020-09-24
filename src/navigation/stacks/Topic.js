@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from './../../screens/Home';
 import TopicDetailScreen from './../../screens/TopicDetail';
+import NewTopicScreen from './../../screens/NewTopic';
 import {screenNames} from '../../shared/screen';
 import {NavHeaderAuthenticated} from '../../component';
 
@@ -24,6 +25,13 @@ export const TopicStack = () => {
       <Stack.Screen
         component={TopicDetailScreen}
         name={screenNames.TopicDetail}
+      />
+      <Stack.Screen
+        component={NewTopicScreen}
+        name={screenNames.NewTopic}
+        options={{
+          title: 'Create New Topic',
+        }}
       />
     </Stack.Navigator>
   );

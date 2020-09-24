@@ -3,7 +3,7 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 import colors from '../../shared/colors';
 
 export const AppTextInput = ({
-  label = null,
+  label = undefined,
   mode = 'contained',
   returnKeyLabel = 'Next',
   returnKeyType = 'next',
@@ -18,10 +18,17 @@ export const AppTextInput = ({
   disabled = false,
   secureTextEntry = false,
   height = undefined,
+  autoFocus = undefined,
 }) => {
   return (
-    <View style={[styles.wrapper, height && {height: height + 10 + 46}]}>
-      <Text style={[styles.baseText]}>{label}</Text>
+    <View
+      style={[
+        styles.wrapper,
+        height && {
+          height: label === undefined ? height + 46 : height + 10 + 46,
+        },
+      ]}>
+      {label !== undefined && <Text style={[styles.baseText]}>{label}</Text>}
       <TextInput
         style={[styles.base, error && styles.baseError, {height}]}
         textAlignVertical="top"
@@ -35,6 +42,7 @@ export const AppTextInput = ({
         onBlur={onBlur}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
+        autoFocus={autoFocus}
       />
       {error && <Text style={[styles.errorText]}>{errorText}</Text>}
     </View>
@@ -43,7 +51,7 @@ export const AppTextInput = ({
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: 46 + 10 + 46,
+    height: 46 + 46,
     padding: 5,
   },
   baseError: {

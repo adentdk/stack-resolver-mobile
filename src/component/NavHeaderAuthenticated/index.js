@@ -26,6 +26,7 @@ export const NavHeaderAuthenticated = (props) => {
       {previous ? (
         <AppBox justifyContent="center" height={64} width={64}>
           <Icon.Button
+            onPress={navigation.goBack}
             backgroundColor={colors.transparent}
             name="chevron-left"
             size={36}
@@ -68,6 +69,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     textAlignVertical: 'center',
-    lineHeight: 56,
+    lineHeight: 64,
   },
 });

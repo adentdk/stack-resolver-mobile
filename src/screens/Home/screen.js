@@ -6,11 +6,14 @@ import TopicList from './components/TopicList';
 
 const HomeScreen = ({
   navigation,
+  route,
   doGetTopicList,
   listLoading,
   listData,
   listPagination,
 }) => {
+  const reload = route?.params?.reload ?? false;
+
   const _onCreateNewTopicPressed = () => {
     navigation.navigate(screenNames.NewTopic);
   };
@@ -31,7 +34,7 @@ const HomeScreen = ({
   return (
     <>
       <AppLoading visible={listLoading} />
-      <AppWrapper>
+      <AppWrapper scrollable={true}>
         <CreateNewTopic onPress={_onCreateNewTopicPressed} />
         <AppDevider height={20} />
         <TopicList pagination={listPagination} rows={listData} />

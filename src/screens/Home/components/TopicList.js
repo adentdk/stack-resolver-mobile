@@ -6,7 +6,7 @@ import {CardTopic} from './CardTopic';
 
 const TopicList = ({rows, pagination}) => {
   const renderItem = ({item, index}) => {
-    return <CardTopic item={item} />;
+    return <CardTopic item={item} key={index} />;
   };
 
   return (
@@ -15,11 +15,7 @@ const TopicList = ({rows, pagination}) => {
         Number of Topics ({pagination.numberOfRows})
       </Text>
       <AppDevider height={20} />
-      <FlatList
-        data={rows}
-        keyExtractor={keyExtractor('topic')}
-        renderItem={renderItem}
-      />
+      {rows.map((row, index) => renderItem({item: row, index}))}
     </View>
   );
 };
