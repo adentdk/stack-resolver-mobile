@@ -5,7 +5,14 @@ import FormProfile from './components/FormProfile';
 import AsyncStorage from '@react-native-community/async-storage';
 import {Alert} from 'react-native';
 
-const ProfileScreen = ({navigation, doLogout, logoutLoading}) => {
+const ProfileScreen = ({
+  navigation,
+  doLogout,
+  doGetProfile,
+  auth,
+  user,
+  profileLoading,
+}) => {
   const _onLogout = () => {
     Alert.alert('Confirm', 'Are you sure to logout?', [
       {
@@ -31,10 +38,13 @@ const ProfileScreen = ({navigation, doLogout, logoutLoading}) => {
   }, []);
 
   return (
-    <AppWrapper scrollable={true}>
+    <AppWrapper
+      scrollable={true}
+      onRefresh={doGetProfile}
+      refreshing={profileLoading}>
       <Header />
       <AppDevider height={40} />
-      <FormProfile />
+      <FormProfile auth={auth} user={user} />
     </AppWrapper>
   );
 };

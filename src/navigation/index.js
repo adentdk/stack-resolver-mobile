@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {LOGIN_SUCCESS} from '../redux/constants';
 import {HomeTabs} from './tabs/Home';
 import {AppLoading} from '../component';
+import {doGetProfile} from '../redux/actions/auth';
 
 const AppNavigation = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,10 @@ const AppNavigation = () => {
         type: LOGIN_SUCCESS,
         payload: token,
       });
+
+      if (token) {
+        dispatch(doGetProfile());
+      }
     }
   };
 

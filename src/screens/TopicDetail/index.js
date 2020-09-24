@@ -1,5 +1,8 @@
 import {connect} from 'react-redux';
-import {doGetCommentsByTopicId} from '../../redux/actions/topic';
+import {
+  doGetCommentsByTopicId,
+  doGetTopicDetail,
+} from '../../redux/actions/topic';
 import TopicDetailScreen from './screen';
 
 const mapStateToProps = (state) => {
@@ -8,11 +11,13 @@ const mapStateToProps = (state) => {
   return {
     listLoading: topicState.commentListLoading,
     listData: topicState.commentList,
+    topic: topicState.topicDetail,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    doGetTopicDetail: (topicId) => dispatch(doGetTopicDetail(topicId)),
     doGetComments: (topicId) => dispatch(doGetCommentsByTopicId(topicId)),
   };
 };

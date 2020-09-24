@@ -14,6 +14,9 @@ import {
   CREATE_TOPIC_COMMENT_SUCCESS,
   CREATE_TOPIC_COMMENT_FAILED,
   CREATE_COMMENT_SET_DEFAULT,
+  GET_TOPIC_DETAIL_LOADING,
+  GET_TOPIC_DETAIL_SUCCESS,
+  GET_TOPIC_DETAIL_FAILED,
 } from '../constants';
 
 export const doGetTopicList = ({
@@ -47,6 +50,30 @@ export const doGetTopicList = ({
     } catch (error) {
       dispatch({
         type: GET_TOPICS_FAILED,
+        payload: error.response?.data?.message ?? error.message,
+        error,
+      });
+    }
+  };
+};
+
+export const doGetTopicDetail = (topicId) => {
+  return async (dispatch) => {
+    dispatch({
+      type: GET_TOPIC_DETAIL_LOADING,
+    });
+
+    try {
+      const response = await client.get('/topic/topics/' + topicId);
+
+      dispatch({
+        type: GET_TOPIC_DETAIL_SUCCESS,
+        payload: response.data.data,
+        response,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_TOPIC_DETAIL_FAILED,
         payload: error.response?.data?.message ?? error.message,
         error,
       });

@@ -22,14 +22,14 @@ const FormProfile = (props) => {
             error={!!errors.email}
             errorText={errors?.email?.message}
             autoCapitalize="none"
-            disabled={props.loading}
+            disabled={true}
           />
         )}
         name="display_name"
         rules={{
           required: {value: true, message: 'Display Name is required'},
         }}
-        defaultValue="Error Resolver"
+        defaultValue={props.user.display_name}
       />
 
       <Controller
@@ -47,14 +47,14 @@ const FormProfile = (props) => {
             error={!!errors.email}
             errorText={errors?.email?.message}
             autoCapitalize="none"
-            disabled={props.loading}
+            disabled={true}
           />
         )}
         name="full_name"
         rules={{
           required: {value: true, message: 'Full Name is required'},
         }}
-        defaultValue="Aden Trisna Daud Kurnia"
+        defaultValue={props.user.full_name}
       />
 
       <Controller
@@ -72,14 +72,14 @@ const FormProfile = (props) => {
             error={!!errors.email}
             errorText={errors?.email?.message}
             autoCapitalize="none"
-            disabled={props.loading}
+            disabled={true}
           />
         )}
         name="location"
         rules={{
           required: {value: true, message: 'Location is required'},
         }}
-        defaultValue="Bandung, Indonesia"
+        defaultValue={props.user.address_location}
       />
     </>
   );

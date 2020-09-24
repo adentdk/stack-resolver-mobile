@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
+import moment from 'moment';
 import {AppBox, AppDevider, AppTextInput, AppWrapper} from '../../component';
 import colors from '../../shared/colors';
 import {screenNames} from '../../shared/screen';
@@ -11,10 +12,12 @@ const TopicDetailScreen = ({
   navigation,
   listLoading,
   listData,
+  topic,
+  doGetTopicDetail,
   doGetComments,
 }) => {
-  const topic = route?.params?.topic ?? {};
   const reload = route?.params?.reload ?? false;
+  const topicId = route?.params?.topicId ?? false;
 
   const _onAnswerPressed = () => {
     navigation.navigate(screenNames.NewComment, {
@@ -22,35 +25,58 @@ const TopicDetailScreen = ({
     });
   };
 
-  const _onGetCommentList = React.useCallback(() => doGetComments(topic.id), [
+  const _onGetTopicDetail = React.useCallback(() => doGetTopicDetail(topicId), [
+    doGetTopicDetail,
+    topicId,
+  ]);
+
+  const _onGetCommentList = React.useCallback(() => doGetComments(topicId), [
     doGetComments,
-    topic.id,
+    topicId,
   ]);
 
   React.useEffect(() => {
-    const bootstrap = () => _onGetCommentList();
+    const bootstrap = () => {
+      _onGetTopicDetail();
+      _onGetCommentList();
+    };
     bootstrap();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
     if (reload) {
+      _onGetTopicDetail();
       _onGetCommentList();
     }
-  }, [_onGetCommentList, reload]);
+  }, [_onGetCommentList, _onGetTopicDetail, reload]);
 
   return (
     <>
       <View style={{flex: 1}}>
-        <AppWrapper scrollable={true}>
+        <AppWrapper
+          scrollable={true}
+          refreshing={listLoading}
+          onRefresh={() => {
+            _onGetTopicDetail();
+            _onGetCommentList();
+          }}>
           <CardTopic topic={topic} />
-          <AppDevider height={10} />
+          <AppDevider height={30} />
           <AppBox flex={1}>
-            <Text>{topic.commentCount} Answers</Text>
+            <Text style={styles.heading}>{topic.commentCount} Answers</Text>
           </AppBox>
           {listData.map((comment, index) => {
             return (
-              <CommentBox key={index.toString()} content={comment.content} />
+              <View key={index.toString()}>
+                <CommentBox
+                  content={comment.content}
+                  footer={`${comment.createdBy} (${moment(
+                    comment.createdAt,
+                  ).fromNow()})`}
+                />
+                <AppDevider height={10} />
+              </View>
             );
           })}
         </AppWrapper>
@@ -65,3 +91,12 @@ const TopicDetailScreen = ({
 };
 
 export default TopicDetailScreen;
+
+const styles = StyleSheet.create({
+  heading: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
+    paddingLeft: 5,
+  },
+});

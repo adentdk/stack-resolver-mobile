@@ -3,11 +3,10 @@ import moment from 'moment';
 import {StyleSheet, Text, View} from 'react-native';
 import {AppBadge, AppBox, AppButton, AppDevider} from '../../../component';
 import colors from '../../../shared/colors';
-import {width} from '../../../shared/dimension';
 import CommentBox from './CommentBox';
 
 const CardTopic = ({topic}) => {
-  const tags = JSON.parse(topic.tags);
+  const tags = topic.tags;
   return (
     <AppBox height={'auto'}>
       <AppBox height={'auto'} borderHorizontal={0.7}>
@@ -24,7 +23,7 @@ const CardTopic = ({topic}) => {
               })}
             </View>
             <AppBox alignItems="flex-end">
-              <Text>{moment(topic.created_at).format('HH:mm DD/MM/YYYY')}</Text>
+              <Text>{moment(topic.createdAt).fromNow()}</Text>
               <Text>
                 Created by <AppButton mode="link" title={topic.createdBy} />
               </Text>

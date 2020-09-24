@@ -9,6 +9,9 @@ import {
   REGISTER_LOADING,
   REGISTER_SUCCESS,
   REGISTER_FAILED,
+  GET_PROFILE_LOADING,
+  GET_PROFILE_SUCCESS,
+  GET_PROFILE_FAILED,
 } from '../constants';
 
 export const doLogin = (email = null, password = null) => {
@@ -61,6 +64,28 @@ export const doRegister = ({name = null, email = null, password = null}) => {
     } catch (error) {
       dispatch({
         type: REGISTER_FAILED,
+        payload: error.response?.data?.message ?? error.message,
+      });
+    }
+  };
+};
+
+export const doGetProfile = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: GET_PROFILE_LOADING,
+    });
+
+    try {
+      const response = await client.get('/account/profile');
+
+      dispatch({
+        type: GET_PROFILE_SUCCESS,
+        payload: response.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_PROFILE_FAILED,
         payload: error.response?.data?.message ?? error.message,
       });
     }

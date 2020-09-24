@@ -1,6 +1,12 @@
 import * as React from 'react';
 
-import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import {
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import colors from '../../shared/colors';
 
 export const AppWrapper = React.memo(
@@ -9,6 +15,8 @@ export const AppWrapper = React.memo(
     children,
     scrollable = false,
     flex = undefined,
+    onRefresh = undefined,
+    refreshing = undefined,
   }) => {
     return (
       <SafeAreaView>
@@ -20,6 +28,9 @@ export const AppWrapper = React.memo(
               flex !== undefined ? {flex} : {},
             ]}
             children={children}
+            refreshControl={
+              <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+            }
           />
         ) : (
           <View

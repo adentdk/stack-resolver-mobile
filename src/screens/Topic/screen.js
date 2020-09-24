@@ -24,7 +24,7 @@ const HomeScreen = ({
 
   const _onItemPress = (topic) => {
     navigation.navigate(screenNames.TopicDetail, {
-      topic: topic,
+      topicId: topic.id,
     });
   };
 
@@ -46,8 +46,10 @@ const HomeScreen = ({
 
   return (
     <>
-      <AppLoading visible={listLoading} />
-      <AppWrapper scrollable={true}>
+      <AppWrapper
+        scrollable={true}
+        refreshing={listLoading}
+        onRefresh={_onGetTopicList}>
         <CreateNewTopic onPress={_onCreateNewTopicPressed} />
         <AppDevider height={20} />
         <TopicList

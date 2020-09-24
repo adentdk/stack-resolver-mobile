@@ -13,12 +13,18 @@ import {
   CREATE_TOPIC_COMMENT_SUCCESS,
   CREATE_TOPIC_COMMENT_FAILED,
   CREATE_COMMENT_SET_DEFAULT,
+  GET_TOPIC_DETAIL_LOADING,
+  GET_TOPIC_DETAIL_SUCCESS,
+  GET_TOPIC_DETAIL_FAILED,
 } from '../constants';
 
 const initialState = {
   topicListLoading: false,
   topicListSuccess: false,
   topicListFailed: false,
+  topicDetailLoading: false,
+  topicDetailSuccess: false,
+  topicDetailFailed: false,
   topicCreateLoading: false,
   topicCreateSuccess: false,
   topicCreateFailed: false,
@@ -30,6 +36,7 @@ const initialState = {
   commentListFailed: false,
   topicList: [],
   topicPagination: {},
+  topicDetail: {tags: []},
   commentList: [],
   error: null,
   message: null,
@@ -55,8 +62,29 @@ export const topicReducer = (state = initialState, action) => {
     case GET_TOPICS_FAILED:
       return {
         ...state,
-        topicListLoading: false,
-        topicListFailed: true,
+        topicDetailLoading: false,
+        topicDetailFailed: true,
+        error: action.payload,
+      };
+    case GET_TOPIC_DETAIL_LOADING:
+      return {
+        ...state,
+        topicDetailLoading: true,
+        topicDetailSuccess: false,
+        topicDetailFailed: false,
+      };
+    case GET_TOPIC_DETAIL_SUCCESS:
+      return {
+        ...state,
+        topicDetailLoading: false,
+        topicDetailSuccess: true,
+        topicDetail: action.payload,
+      };
+    case GET_TOPIC_DETAIL_FAILED:
+      return {
+        ...state,
+        topicDetailLoading: false,
+        topicDetailFailed: true,
         error: action.payload,
       };
 

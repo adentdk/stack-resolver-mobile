@@ -8,6 +8,9 @@ import {
   REGISTER_LOADING,
   REGISTER_SUCCESS,
   REGISTER_FAILED,
+  GET_PROFILE_LOADING,
+  GET_PROFILE_SUCCESS,
+  GET_PROFILE_FAILED,
 } from '../constants';
 
 const initialState = {
@@ -20,6 +23,9 @@ const initialState = {
   registerLoading: false,
   registerSuccess: false,
   registerFailed: false,
+  getProfileLoading: false,
+  getProfileSuccess: false,
+  getProfileFailed: false,
   auth: {
     email: '',
     token: null,
@@ -103,6 +109,32 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         registerLoading: false,
         registerFailed: true,
+        error: action.payload,
+      };
+
+    case GET_PROFILE_LOADING:
+      return {
+        ...state,
+        getProfileLoading: true,
+        getProfileSuccess: false,
+        getProfileFailed: false,
+      };
+    case GET_PROFILE_SUCCESS:
+      return {
+        ...state,
+        getProfileLoading: false,
+        getProfileSuccess: true,
+        auth: {
+          ...state.auth,
+          email: action.payload.email,
+        },
+        user: action.payload.user,
+      };
+    case GET_PROFILE_FAILED:
+      return {
+        ...state,
+        getProfileLoading: false,
+        getProfileFailed: true,
         error: action.payload,
       };
 
